@@ -11,26 +11,26 @@
     that:
       - "minecraft_server in supported_minecraft_servers"
 
-- include: "{{ minecraft_hook_before_setup | default('empty.yml') }}"
+- ansible.builtin.include_tasks: "{{ minecraft_hook_before_setup | default('empty.yml') }}"
 
-- include: fetchversion/main.yml
+- ansible.builtin.include_tasks: fetchversion/main.yml
 
-- include: setup/main.yml
+- ansible.builtin.include_tasks: setup/main.yml
 
-- include: plugins/main.yml
+- ansible.builtin.include_tasks: plugins/main.yml
   when: "minecraft_plugin_sets is defined and (0 < minecraft_plugin_sets | length )"
 
-- include: "{{ minecraft_hook_after_setup | default('empty.yml') }}"
+- ansible.builtin.include_tasks: "{{ minecraft_hook_after_setup | default('empty.yml') }}"
 
-- include: "{{ minecraft_hook_before_download | default('empty.yml') }}"
+- ansible.builtin.include_tasks: "{{ minecraft_hook_before_download | default('empty.yml') }}"
 
-- include: downloadhelper/main.yml
+- ansible.builtin.include_tasks: downloadhelper/main.yml
 
-- include: download/main.yml
+- ansible.builtin.include_tasks: download/main.yml
 
-- include: "{{ minecraft_hook_after_download | default('empty.yml') }}"
+- ansible.builtin.include_tasks: "{{ minecraft_hook_after_download | default('empty.yml') }}"
 
-- include: "{{ minecraft_hook_before_install | default('empty.yml') }}"
+- ansible.builtin.include_tasks: "{{ minecraft_hook_before_install | default('empty.yml') }}"
 
 - name: Finalize the Server deploy, removing the unfinished file and switching the symlink
   deploy_helper:
@@ -39,18 +39,18 @@
     state: finalize
   changed_when: False
 
-- include: install/main.yml
+- ansible.builtin.include_tasks: install/main.yml
 
-- include: "{{ minecraft_hook_after_install | default('empty.yml') }}"
+- ansible.builtin.include_tasks: "{{ minecraft_hook_after_install | default('empty.yml') }}"
 
-- include: acl.yml
+- ansible.builtin.include_tasks: acl.yml
 
-- include: configure.yml
+- ansible.builtin.include_tasks: configure.yml
 
-- include: process_controll/main.yml
+- ansible.builtin.include_tasks: process_controll/main.yml
 
-- include: "{{ minecraft_hook_before_start | default('empty.yml') }}"
+- ansible.builtin.include_tasks: "{{ minecraft_hook_before_start | default('empty.yml') }}"
 
 - meta: flush_handlers
 
-- include: "{{ minecraft_hook_after_start | default('empty.yml') }}"
+- ansible.builtin.include_tasks: "{{ minecraft_hook_after_start | default('empty.yml') }}"

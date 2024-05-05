@@ -1,10 +1,10 @@
 ---
 
-- include: minecraft.yml
+- ansible.builtin.include_tasks: minecraft.yml
   when: minecraft_server == 'minecraft'
 
-- include: paper.yml
+- ansible.builtin.include_tasks: paper.yml
   when: minecraft_server == 'paper'
 
-- include: spigot.yml
+- ansible.builtin.include_tasks: spigot.yml
   when: minecraft_server == 'spigot'
